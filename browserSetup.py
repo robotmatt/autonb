@@ -1,12 +1,12 @@
 def browserSetup(browser, productionServer):
     if productionServer:
         # browser.get('https://transstates.navtechpbs.com/cgi-bin-xml/class/login.cgi')
-        browser.get('https://ucapbs.navblue.aero/cgi-bin-xml/class/login.cgi')
+        browser.get('https://uca.pbs.vmc.navblue.cloud/cgi-bin-xml/class/main.cgi')
         try:
             empNum = browser.find_element_by_name('EmployeeNumber')
-            empNum.send_keys('######')
+            empNum.send_keys('******')
             passwordElem = browser.find_element_by_name('Password')
-            passwordElem.send_keys('######')
+            passwordElem.send_keys('*****')
             passwordElem.submit()
             print('Logged in')
             print()

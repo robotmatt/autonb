@@ -14,20 +14,18 @@ def basicRun(prefix, suffix,\
              normal_floor, normal_ceiling, normal_threshold_hour, normal_threshold_minute,\
              max_floor, max_ceiling, max_threshold_hour, max_threshold_minute,\
              browser, testMode, verbose, runNumber):
-  if prefix == "":
-    runName = base + "-" + seat + "_" + str(min_floor) + "-" + str(min_ceiling) + "-" + str(min_threshold_hour) + str(min_threshold_minute).zfill(2) + "__" + str(normal_floor) + "-" + str(normal_ceiling) + "-" + str(normal_threshold_hour) + str(normal_threshold_minute).zfill(2) + "__" + str(max_floor) + "-" + str(max_ceiling) + "-" + str(max_threshold_hour) + str(max_threshold_minute).zfill(2) + "_" + suffix
-  else:
-    runName = prefix + "_" + base + "-" + seat + "_" + str(min_floor) + "-" + str(min_ceiling) + "-" + str(min_threshold_hour) + str(min_threshold_minute).zfill(2) + "__" + str(normal_floor) + "-" + str(normal_ceiling) + "-" + str(normal_threshold_hour) + str(normal_threshold_minute).zfill(2) + "__" + str(max_floor) + "-" + str(max_ceiling) + "-" + str(max_threshold_hour) + str(max_threshold_minute).zfill(2) + "_" + suffix
+
+  runName = "R" + str(runNumber) + "-" + base + "-" + seat + "-" + "TTE"
 
   element = WebDriverWait(browser, 60).until(
     EC.visibility_of_element_located((By.XPATH, "//*[@value='Launch Run']"))
   )
   if verbose:
     print("Launch page is ready")
-  launchButton = browser.find_element_by_xpath("//*[@value='Launch Run']")
+  launchButton = browser.find_element("xpath", "//*[@value='Launch Run']")
   launchButton.click()
 
-  groupDropdown = Select(browser.find_element_by_xpath(
+  groupDropdown = Select(browser.find_element("xpath",
     "//*[contains(@id,'add_run_to_queue_rungroups')]"))
   group = base + "-XMJ-" + seat
   if verbose:
@@ -35,16 +33,22 @@ def basicRun(prefix, suffix,\
   groupDropdown.select_by_visible_text(group)
 
   # set the run name
-  runNameTextBox = browser.find_element_by_xpath(
+  runNameTextBox = browser.find_element("xpath",
     "//*[contains(@id,'add_run_to_queue_name')]")
   runNameTextBox.send_keys(runName)
 
   a = []
-  a = browser.find_elements_by_class_name("ValidatingText")
-  # if verbose:
-  #   #prints a log of all the ValidatingText elements
+  a = browser.find_elements(By.CLASS_NAME, "ValidatingText")
+  #inputElement = driver.find_element(by=By.NAME, value='quantity')
+  #a = browser.find_element("NAME", 'ValidatingText')
+  ### below is original line of code that has been decremented
+  #a = browser.find_elements_by_class_name("ValidatingText")
+  #a = browser.find_element("name", "ValidatingText")
+  #a = browser.find_element_by_name("ValidatingText") 
+  #if verbose:
+     #prints a log of all the ValidatingText elements
   #   print(len(a))
-  #   for element in a:
+  #for element in a:
   #     print("element = ", element.get_attribute("id"), " with value ", element.get_attribute("value"))
 
   #####################################
@@ -119,7 +123,7 @@ def basicRun(prefix, suffix,\
   ## Cancel or save
   #####################################
   if testMode:
-    cancelButton = browser.find_element_by_xpath("//*[@value='Cancel']")
+    cancelButton = browser.find_element("xpath", "//*[@value='Cancel']")
     cancelButton.click()
     if verbose:
       print('Canceled ' + runName)
@@ -128,6 +132,6 @@ def basicRun(prefix, suffix,\
     if verbose:
       print('Submitting ' + runName)
       print()
-    saveButton = browser.find_element_by_xpath("//*[@value='Save']")
+    saveButton = browser.find_element("xpath", "//*[@value='Save']")
     saveButton.click()
     time.sleep(timeBetween)
