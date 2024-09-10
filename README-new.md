@@ -27,6 +27,8 @@ https://www.jetbrains.com/toolbox-app/
 To run:
 
 change settings in config file
+allow securirty
+download chrome
 
 Keep homebrew up to date
 

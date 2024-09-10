@@ -1,16 +1,20 @@
+from selenium.webdriver.support.wait import WebDriverWait
+
+
 def browserSetup(browser, productionServer):
     if productionServer:
         # browser.get('https://transstates.navtechpbs.com/cgi-bin-xml/class/login.cgi')
         browser.get('https://uca.pbs.vmc.navblue.cloud/cgi-bin-xml/class/main.cgi')
         try:
-            empNum = browser.find_element_by_name('EmployeeNumber')
-            empNum.send_keys('******')
-            passwordElem = browser.find_element_by_name('Password')
-            passwordElem.send_keys('*****')
+            empNum = browser.find_element("name", "EmployeeNumber")
+            empNum.send_keys('*****')
+            passwordElem = browser.find_element("name", "Password")
+            passwordElem.send_keys('*******')
             passwordElem.submit()
             print('Logged in')
             print()
-        except:
+        except Exception as e:
+            print(e)
             print('Might already be logged in')
     else:
         browser.get('https://transstatesuat.navtechpbs.com/cgi-bin-xml/class/login.cgi')

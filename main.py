@@ -19,13 +19,13 @@ maxMinCredit = 0
 # add a prefix to the run
 # this can be useful if you want to label runs with "test"
 # if it's empty between the quotes then nothing will be added
-prefix = ""
+prefix = "TEST"
 
 # add a suffix to the end of the name of the run
 # this is useful if you already did a set of runs so this will be added to the end to make it unique
 # if it's empty between the quotes then nothing will be added
 # not really necessary since timestamps are included
-suffix = "TTE"
+suffix = "MM"
 
 # set the max stack height for unstacking on line holders
 # maximimum stack height must be at least 6% of regular line holders
@@ -69,7 +69,7 @@ browser = seleniumSetup()
 browserSetup(browser, productionServer)
 time.sleep(5) #wait for the javascript to load
 
-runcount = 1000
+runcount = 1000 #unique name for run
 now = datetime.now()  # current date and time
 date_time = now.strftime("%Y-%m-%d_%H:%M:%S")
 
