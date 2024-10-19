@@ -15,7 +15,7 @@ def basicRun(prefix, suffix,\
              max_floor, max_ceiling, max_threshold_hour, max_threshold_minute,\
              browser, testMode, verbose, runNumber):
 
-  runName = "R" + str(runNumber) + "-" + base + "-" + seat + "-" + "TTE"
+  runName = "R" + str(runNumber) + "-" + base + "-" + seat + "-" + suffix
 
   element = WebDriverWait(browser, 60).until(
     EC.visibility_of_element_located((By.XPATH, "//*[@value='Launch Run']"))

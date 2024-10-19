@@ -1,4 +1,5 @@
 from selenium.webdriver.support.wait import WebDriverWait
+from secrets import *
 
 
 def browserSetup(browser, productionServer):
@@ -7,9 +8,9 @@ def browserSetup(browser, productionServer):
         browser.get('https://uca.pbs.vmc.navblue.cloud/cgi-bin-xml/class/main.cgi')
         try:
             empNum = browser.find_element("name", "EmployeeNumber")
-            empNum.send_keys('*****')
+            empNum.send_keys(username)
             passwordElem = browser.find_element("name", "Password")
-            passwordElem.send_keys('*******')
+            passwordElem.send_keys(password)
             passwordElem.submit()
             print('Logged in')
             print()
