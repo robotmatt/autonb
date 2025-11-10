@@ -1,7 +1,6 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from secrets import *
 
-
 def browserSetup(browser, productionServer):
     if productionServer:
         # browser.get('https://transstates.navtechpbs.com/cgi-bin-xml/class/login.cgi')

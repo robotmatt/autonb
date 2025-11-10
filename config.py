@@ -1,18 +1,22 @@
-runcount = 1000 #unique name for run
+# Configuration file for autonb
 
-# set the base as individual or group of bases
-seat = "CA"
-# CA or FO
+# unique name for run, all PBS runs need a unique name so increment this for each set of auto runs you do
+runcount = 1000
 
+# baseList: the base as individual or group of bases
 # group would be separated by comma like this: baseList = ['IAH','IAD','DEN']
 # individual would be baseList = ['IAH']
 baseList = ['IAH']
+
+# seat you're trying to run, CA or FO
+seat = "CA"
 
 # set the max number of people that can bid min credit
 # contractually must allow 15% of line holders for a given base and position (new in LOA5)
 # set to 0 if number of min credit bidders will not be restricted
 maxMinCredit = 0
 
+# max number of mixed lines. generally leave at 0 until we manually add mixed lines later depending on open time
 maxMixedLines = 0
 
 # add a prefix to the run
@@ -36,6 +40,7 @@ pointOrDayStack = "day" #set this to either "point" or "day"
 
 # set the max number of iterations
 # Our default is set to 2,000,000. Help file says it should be between 5,000,000 and 10,000,000
+# number at the end is an "easter egg" to see if someone else took your run
 two_mil = 2000002
 five_mil = 5000005
 ten_mil = 10000001
@@ -59,6 +64,7 @@ testMode = True
 verbose = True
 
 # set the constants for fixed windows
+# CBA Windows min = 77-87, norm = 83-93, max = 90-100
 minFloor = 77
 minCeiling = 87
 normalFloor = 83
@@ -66,7 +72,8 @@ normalCeiling = 93
 maxFloor = 90
 maxCeiling = 100
 
-# set the constants for split credit windows. If this is 0 then it just uses the normal credit windows
+# set the constants for split credit windows
+# If this is 0 then it just uses the normal credit windows (usually should be set 0)
 split_low = 0
 split_high = 0
 split_threshold = 0
@@ -75,18 +82,3 @@ split_threshold = 0
 mixed_low = 38
 mixed_high = 42
 mixed_threshold = 40
-
-# CBA Windows
-# minFloor = 77
-# minCeiling = 87
-# normalFloor = 83
-# normalCeiling = 93
-# maxFloor = 90
-#maxCeiling = 100
-#split_low = 83
-#split_high = 93
-#split_threshold = 83
-
-#split_low = 55
-#split_high = 70
-#split_threshold = 55
