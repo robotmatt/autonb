@@ -53,7 +53,7 @@ baselineTest = "None"
 
 # set the testMode to True or False.
 # If set to True, the program will go through the motions, but not actually start the run
-testMode = False
+testMode = True
 
 # print detailed messages
 verbose = True
@@ -65,10 +65,13 @@ normalFloor = 83
 normalCeiling = 93
 maxFloor = 90
 maxCeiling = 100
-split_low = 83
-split_high = 93
-split_threshold = 87
 
+# set the constants for split credit windows. If this is 0 then it just uses the normal credit windows
+split_low = 0
+split_high = 0
+split_threshold = 0
+
+# set the constants for the mixed line windows
 mixed_low = 38
 mixed_high = 42
 mixed_threshold = 40
