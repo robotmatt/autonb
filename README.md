@@ -1,52 +1,48 @@
 # autonb
-Automated way to do NAVBLUE schedule runs
+Automated way to do NAVBLUE schedule runs, customized for C5's version of Navblue PBS.
 
 
-### Fresh install of python3 and selenium on High Sierra
-1. Follow instructions at https://docs.python-guide.org/starting/install3/osx/
-2. Download and install command line tools from Apple Developer https://developer.apple.com/download/more/
-3. Install Homebrew with command given in the python installation guide
-4. Create the .profile file in your home directory and then open it in textedit
-	1. `touch ~/.profile`
-	2. `open -e ~/.profile`
-5. The .profile file should be empty so add this line to it:
-	1. `export PATH="/usr/local/opt/python/libexec/bin:$PATH"`
-6. Then install python as instructed in the installation guide
-7. Check to see what version of python was installed and that it runs properly
-	1. `python --version`
-8. Then install selenium using pip:
-	1. `pip install selenium`
-9. You can check to see what version of selenium was installed by:
-	1. `pip freeze`
-10. Install drivers to interface with the different browsers
-	1. Can do manually via https://selenium-python.readthedocs.io/installation.html
-	2. Chrome - https://sites.google.com/a/chromium.org/chromedriver/downloads
-	3. or [this page](https://www.kenst.com/2015/03/installing-chromedriver-on-mac-osx/) mentions
-		1. `brew install --cask chromedriver`
-11. Install some sort of IDE. CodeRunner via the appstore. Can download PyCharm community edition from their website or use homebrew.
-	1. `brew install --cask pycharm-ce`
-12. If using PyCharm, need to add selenium to the project
-	1. Go to PyCharm->Preferences->Project XXXXX->Project Interpreter
-	2. Then click the + and it will install selenium
-	3. Might be able to specify interpreter and packages from system when you create a project
+## Fresh install of python3 and selenium on MacOS Tahoe (26)
+1. Follow instructions at https://brew.sh/ to install Homebrew
+2. Install python using `brew install python`
+3. Verify Installation:
+   * Close and relaunch the terminal to ensure the system recognizes the newly installed Python.
+   * Type `python3 --version` and press Enter. This should display the installed Python version.
+   * You can also type python to open the Python interactive shell.
+4. Install git `brew install git`
+5. Install github-desktop (optional) `brew install --cask github`
+6. Install chromedriver `brew install chromedriver`
+9. Install PyCharm from https://www.jetbrains.com/pycharm/download/ (or use your favorite Python IDE)
+10. Verify PIP installed `pip --version`
+11. Install Selenium `pip install selenium`
 
+## Fresh install of python3 and selenium on Windows 11
+1. Follow instructions at https://chocolatey.org/install to install Chocolatey
+2. Install python using `choco install python`
+   * If prompted to accept licenses or run scripts during the installation, type Y for yes or A for all. To avoid prompts, you can add -y to the command:
+   * `choco install python -y`
+4. Verify Installation:
+   * Close and relaunch the terminal to ensure the system recognizes the newly installed Python.
+   * Type `python --version` and press Enter. This should display the installed Python version.
+   * You can also type python to open the Python interactive shell.
+5. Install git `choco install git`
+6. Install github-desktop (optional) `choco install github-desktop`
+7. Install chromedriver `choco install chromedriver`
+9. Install PyCharm from https://www.jetbrains.com/pycharm/download/ (or use your favorite Python IDE)
+10. Verify PIP installed `py -m pip --version`
+11. Install Selenium `py -m pip install selenium`
+
+## Import project into PyCharm
 
 ### Keep homebrew up to date
 ##### From https://docs.brew.sh/FAQ
-To update homebrew:
-`brew update`
+First update all package definitions (formulae) and Homebrew itself: `brew update`
 
-To find out what is out of date:
-`brew outdated`
+You can now list which of your installed packages (kegs) are outdated with: `brew outdated`
 
-Upgrade everything with:
-`brew upgrade`
+Upgrade everything with: `brew upgrade`
 
-To list the versions of installed casks:
-`brew cask list --versions`
+Or upgrade a specific formula with:`brew upgrade <formula>`
 
-As of December 2017, you can also keep Brew Cask up to date ([per Stack Overflow](https://stackoverflow.com/questions/31968664/upgrade-all-the-casks-installed-via-homebrew-cask))
-`brew cask upgrade`
-
-However this will not update casks that do not have versioning information (version :latest) or applications that have a built-in upgrade mechanism (auto_updates true). To reinstall these casks (and consequently upgrade them if upgrades are available), run the upgrade command with the --greedy flag like this:
-`brew cask upgrade --greedy`
+### Keep Chocolatey up to date
+Once installed, Chocolatey can be upgraded in exactly the same way as any other package that has been installed using Chocolatey. Simply use the command to upgrade to the latest stable release of Chocolatey: `choco upgrade chocolatey`
