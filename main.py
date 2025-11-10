@@ -14,21 +14,6 @@ time.sleep(5)  # wait for the javascript to load
 now = datetime.now()  # current date and time
 date_time = now.strftime("%Y-%m-%d_%H:%M:%S")
 
-# for base in baseList:
-# set the constants for fixed windows
-#    minFloor = 77
-#    minCeiling = 87
-#    normalFloor = 83
-#    normalCeiling = 93
-#    maxFloor = 90
-#    maxCeiling = 100
-
-#    for minThresholdHour in range(minFloor, minCeiling, 1): #incrememnt the threshold hour between the floor and ceiling
-#        for minThresholdMinute in range(0, 60, 60): #set the minute portion of the threshold. If set to (0, 60, 60) it will just do whole hours. If set to (0, 60, 30) then it will be 30 min increments. Can go as low as 15 minute increments.
-
-#            basicRun(prefix, date_time, ten_mil, base, seat, minFloor, minCeiling, minThresholdHour, minThresholdMinute, normalFloor, normalCeiling, 83, 00, maxFloor, maxCeiling, 90, 0, browser, testMode, verbose, runcount)
-#            runcount = runcount + 1
-
 if baselineTest == "CA" or baselineTest == "All":
     basicRun("TEST_low", date_time, ten_mil, "IAH", "CA", 60, 75, 65, 70, 85, 75, 80, 95, 90, browser, testMode,
              verbose, 1)
