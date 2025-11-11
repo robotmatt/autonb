@@ -5,6 +5,7 @@ AutoNB is a Python-based automation tool designed to simplify and streamline the
 See [INSTALL.md](INSTALL.md)
 
 ## Usage
+### Credentials
 Enter your NavBlue Username and Password into the secrets.py file. If it doesn't exist just create a secrets.py that looks like this:
 
 `username = 'Username'`<br /> 
@@ -12,6 +13,9 @@ Enter your NavBlue Username and Password into the secrets.py file. If it doesn't
 
 ### config.py
 Most of the settings you need are contained in config.py. See the inline documentation for usage of all the variables
+
+### Running the Program
+Execute the script by running `main.py` after setting all of the configuration variables in config.py
 
 ## 📁 Project Structure
 | File      | Purpose                                                                                                 |
