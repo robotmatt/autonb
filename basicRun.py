@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
-from config import maxMixedLines
+from config import *
 
 # time between keypresses (0.25 is a known good number)
 timeBetween = .025

@@ -47,6 +47,14 @@ ten_mil = 10000001
 all_nines = 99999999
 maxIterations = two_mil
 
+# set the number of minutes to increment. either use 60, 30, or 15 min
+# Usually you get the most results by adjusting min credit, but sometime norm. Rarely with max
+# 15 min increments greatly increases the number of runs that are completed
+minThresholdIncrement = 60
+normThresholdIncrement = 60
+maxThresholdIncrement = 60
+
+
 # specify which server and credentials to use
 # using the production server is normal and would be set to True
 productionServer = True

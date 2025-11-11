@@ -50,18 +50,12 @@ elif baselineTest == "FO" or baselineTest == "All":
              testMode, verbose, 8)
 else:
     for base in baseList:
-        for minThresholdHour in range(minFloor, minCeiling,
-                                      2):  # incrememnt the threshold hour between the floor and ceiling by 2
-            for minThresholdMinute in range(0, 60,
-                                            60):  # set the minute portion of the threshold. If set to (0, 60, 60) it will just do whole hours. If set to (0, 60, 30) then it will be 30 min increments. Can go as low as 15 minute increments.
-                for maxThresholdHour in range(maxFloor, maxCeiling,
-                                              2):  # incrememnt the threshold hour between the floor and ceiling
-                    for maxThresholdMinute in range(0, 60,
-                                                    60):  # set the minute portion of the threshold. If set to (0, 60, 60) it will just do whole hours. If set to (0, 60, 30) then it will be 30 min increments. Can go as low as 15 minute increments.
-                        for normalThresholdHour in range(normalFloor,
-                                                         normalCeiling):  # incrememnt the threshold hour between the floor and ceiling
-                            for normalThresholdMinute in range(0, 60,
-                                                               60):  # set the minute portion of the threshold. If set to (0, 60, 60) it will just do whole hours. If set to (0, 60, 30) then it will be 30 min increments. Can go as low as 15 minute increments.
+        for minThresholdHour in range(minFloor, minCeiling, 2):  # incrememnt the threshold hour between the floor and ceiling by 2
+            for minThresholdMinute in range(0, 60, minThresholdIncrement):  # set the minute portion of the threshold. If set to (0, 60, 60) it will just do whole hours. If set to (0, 60, 30) then it will be 30 min increments. Can go as low as 15 minute increments.
+                for maxThresholdHour in range(maxFloor, maxCeiling, 2):  # incrememnt the threshold hour between the floor and ceiling
+                    for maxThresholdMinute in range(0, 60, maxThresholdIncrement):  # set the minute portion of the threshold. If set to (0, 60, 60) it will just do whole hours. If set to (0, 60, 30) then it will be 30 min increments. Can go as low as 15 minute increments.
+                        for normalThresholdHour in range(normalFloor, normalCeiling):  # incrememnt the threshold hour between the floor and ceiling
+                            for normalThresholdMinute in range(0, 60, normThresholdIncrement):  # set the minute portion of the threshold. If set to (0, 60, 60) it will just do whole hours. If set to (0, 60, 30) then it will be 30 min increments. Can go as low as 15 minute increments.
                                 if minFloor <= normalFloor and minThresholdHour <= normalFloor:  # NAVBLUE won't let the min floor be greater than the normal floor
                                     if minFloor <= maxFloor and minThresholdHour <= maxFloor:  # NAVBLUE won't let the normal floor be greater than the max floor
                                         if normalFloor <= maxFloor and normalThresholdHour <= maxFloor:  # NAVBLUE won't let the normal floor be greater than the max floor
