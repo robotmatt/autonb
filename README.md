@@ -1,48 +1,28 @@
-# autonb
-Automated way to do NAVBLUE schedule runs, customized for C5's version of Navblue PBS.
+# 🛫 AutoNB: Automated Navblue PBS Runs
+AutoNB is a Python-based automation tool designed to simplify and streamline the process of running Navblue PBS schedule runs, customized for C5's version of Navblue PBS.
+
+## 🖥️ Environment Setup Instructions
+See [INSTALL.md](INSTALL.md)
+
+## Usage
+Enter your NavBlue Username and Password into the secrets.py file. If it doesn't exist just create a secrets.py that looks like this:
+
+`username = 'Username'`<br /> 
+`password = 'Password'`<br />
+
+### config.py
+Most of the settings you need are contained in config.py. See the inline documentation for usage of all the variables
+
+## 📁 Project Structure
+| File      | Purpose                                                                                                 |
+|-----------|---------------------------------------------------------------------------------------------------------|
+| main.py   | Entry point for executing schedule runs. This is the file you should be running when you execute autonb |
+| config.py | Most of the configuration settings are available here                                                   |
+| basicRun.py | Handles the basic PBS run scenarios                                                                     |
+| complexRun.py | TBD, attempt to try to auto unstack | 
+| browserSetup.py| Selenium browser setup | 
 
 
-## Fresh install of python3 and selenium on MacOS Tahoe (26)
-1. Follow instructions at https://brew.sh/ to install Homebrew
-2. Install python using `brew install python`
-3. Verify Installation:
-   * Close and relaunch the terminal to ensure the system recognizes the newly installed Python.
-   * Type `python3 --version` and press Enter. This should display the installed Python version.
-   * You can also type python to open the Python interactive shell.
-4. Install git `brew install git`
-5. Install github-desktop (optional) `brew install --cask github`
-6. Install chromedriver `brew install chromedriver`
-9. Install PyCharm from https://www.jetbrains.com/pycharm/download/ (or use your favorite Python IDE)
-10. Verify PIP installed `pip --version`
-11. Install Selenium `pip install selenium`
+## 📄 License
 
-## Fresh install of python3 and selenium on Windows 11
-1. Follow instructions at https://chocolatey.org/install to install Chocolatey
-2. Install python using `choco install python`
-   * If prompted to accept licenses or run scripts during the installation, type Y for yes or A for all. To avoid prompts, you can add -y to the command:
-   * `choco install python -y`
-4. Verify Installation:
-   * Close and relaunch the terminal to ensure the system recognizes the newly installed Python.
-   * Type `python --version` and press Enter. This should display the installed Python version.
-   * You can also type python to open the Python interactive shell.
-5. Install git `choco install git`
-6. Install github-desktop (optional) `choco install github-desktop`
-7. Install chromedriver `choco install chromedriver`
-9. Install PyCharm from https://www.jetbrains.com/pycharm/download/ (or use your favorite Python IDE)
-10. Verify PIP installed `py -m pip --version`
-11. Install Selenium `py -m pip install selenium`
-
-## Import project into PyCharm
-
-### Keep homebrew up to date
-##### From https://docs.brew.sh/FAQ
-First update all package definitions (formulae) and Homebrew itself: `brew update`
-
-You can now list which of your installed packages (kegs) are outdated with: `brew outdated`
-
-Upgrade everything with: `brew upgrade`
-
-Or upgrade a specific formula with:`brew upgrade <formula>`
-
-### Keep Chocolatey up to date
-Once installed, Chocolatey can be upgraded in exactly the same way as any other package that has been installed using Chocolatey. Simply use the command to upgrade to the latest stable release of Chocolatey: `choco upgrade chocolatey`
+Distributed under the BSD-3-Clause License — free to use and modify with attribution.
