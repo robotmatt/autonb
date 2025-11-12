@@ -6,7 +6,7 @@ runcount = 1000
 # baseList: the base as individual or group of bases
 # group would be separated by comma like this: baseList = ['IAH','IAD','DEN']
 # individual would be baseList = ['IAH']
-baseList = ['IAH']
+baseList = ['IAD']
 
 # seat you're trying to run, CA or FO
 seat = "CA"
@@ -45,11 +45,12 @@ two_mil = 2000002
 five_mil = 5000005
 ten_mil = 10000001
 all_nines = 99999999
-maxIterations = two_mil
+maxIterations = ten_mil
 
 # set the number of minutes to increment. either use 60, 30, or 15 min
 # Usually you get the most results by adjusting min credit, but sometime norm. Rarely with max
 # 15 min increments greatly increases the number of runs that are completed
+# if you have over 1200 or so completed you will break PBS, so make sure you're cleaning up after yourself
 minThresholdIncrement = 60
 normThresholdIncrement = 60
 maxThresholdIncrement = 60
