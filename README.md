@@ -9,8 +9,10 @@ AutoNB is a Python-based automation tool designed to simplify and streamline the
 - **Option B:** Download the installer from [python.org](https://www.python.org/downloads/macos/)
 
 **Windows**
-- Download the installer from [python.org](https://www.python.org/downloads/windows/)
-- **IMPORTANT:** Check the box **"Add Python to PATH"** during installation.
+- **Option A (Recommended):** Install via Chocolatey: `choco install python`
+  - If you don't have Chocolatey, install it from [chocolatey.org](https://chocolatey.org/install)
+- **Option B:** Download the installer from [python.org](https://www.python.org/downloads/windows/)
+  - **IMPORTANT:** Check the box **"Add Python to PATH"** during installation.
 
 ### 2. Setup & Run
 **MacOS / Linux**
@@ -31,17 +33,27 @@ Enter your NavBlue Username and Password into the `userInfo.py` file (renamed fr
 `username = 'Username'`<br /> 
 `password = 'Password'`<br />
 
+**Note:** If you leave `userInfo.py` empty or don't create it, the app will automatically prompt you for credentials in the UI.
+
 ### config.py
 Most of the settings you need are contained in config.py. See the inline documentation for usage of all the variables. You can now also configure these directly in the UI!
 
 ## 📁 Project Structure
 | File      | Purpose                                                                                                 |
-|-----------|---------------------------------------------------------------------------------------------------------|
-| main.py   | Entry point for executing schedule runs. This is the file you should be running when you execute autonb |
-| config.py | Most of the configuration settings are available here                                                   |
-| basicRun.py | Handles the basic PBS run scenarios                                                                     |
-| complexRun.py | TBD, attempt to try to auto unstack | 
-| browserSetup.py| Selenium browser setup | 
+|-----------|----------------------------------------------------------------------------------------------------------|
+| **app.py** | **Main Streamlit UI application - run this to use the web interface** |
+| **run_app.sh** | Helper script to install dependencies and launch the app (Mac/Linux) |
+| **run_app.bat** | Helper script to install dependencies and launch the app (Windows) |
+| main.py   | Legacy CLI entry point for executing schedule runs |
+| mainUnstack.py | Legacy CLI entry point for unstack runs |
+| config.py | Default configuration settings (can be overridden in the UI) |
+| userInfo.py | NavBlue PBS credentials (username/password) |
+| basicRun.py | Handles the basic PBS run scenarios |
+| unstackRun.py | Handles unstack PBS run scenarios |
+| run_logic.py | Logic for generating run parameters |
+| browserSetup.py | Selenium browser setup and login |
+| seleniumSetup.py | ChromeDriver setup using webdriver-manager |
+| requirements.txt | Python dependencies | 
 
 
 ## 📄 License
