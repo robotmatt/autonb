@@ -16,6 +16,7 @@ def basicRun(prefix, suffix, maxMinCredit,\
              normal_floor, normal_ceiling, normal_threshold_hour, normal_threshold_minute,\
              max_floor, max_ceiling, max_threshold_hour, max_threshold_minute,\
              split_low, split_high, split_threshold,\
+             maxMixedLines, mixed_low, mixed_high, mixed_threshold,\
              browser, testMode, verbose, runNumber):
 
   runName = prefix + str(runNumber) + "-" + base + "-" + seat + "-" + suffix
@@ -168,45 +169,45 @@ def basicRun(prefix, suffix, maxMinCredit,\
       a[31].send_keys(Keys.TAB)
 
   ####################################
-  ## Mixed Lines (hardcoded right now)
+  ## Mixed Lines
   #####################################
   a[50].send_keys(Keys.BACKSPACE)
   a[50].send_keys(Keys.BACKSPACE)
-  a[50].send_keys("38")
+  a[50].send_keys(mixed_low)
   a[51].send_keys(Keys.TAB)
   a[52].send_keys(Keys.BACKSPACE)
   a[52].send_keys(Keys.BACKSPACE)
-  a[52].send_keys("42")
+  a[52].send_keys(mixed_high)
   a[53].send_keys(Keys.TAB)
   a[54].send_keys(Keys.BACKSPACE)
   a[54].send_keys(Keys.BACKSPACE)
-  a[54].send_keys("40")
+  a[54].send_keys(mixed_threshold)
   a[55].send_keys(Keys.TAB)
 
   a[56].send_keys(Keys.BACKSPACE)
   a[56].send_keys(Keys.BACKSPACE)
-  a[56].send_keys("38")
+  a[56].send_keys(mixed_low)
   a[57].send_keys(Keys.TAB)
   a[58].send_keys(Keys.BACKSPACE)
   a[58].send_keys(Keys.BACKSPACE)
-  a[58].send_keys("42")
+  a[58].send_keys(mixed_high)
   a[59].send_keys(Keys.TAB)
   a[60].send_keys(Keys.BACKSPACE)
   a[60].send_keys(Keys.BACKSPACE)
-  a[60].send_keys("40")
+  a[60].send_keys(mixed_threshold)
   a[61].send_keys(Keys.TAB)
 
   a[62].send_keys(Keys.BACKSPACE)
   a[62].send_keys(Keys.BACKSPACE)
-  a[62].send_keys("38")
+  a[62].send_keys(mixed_low)
   a[63].send_keys(Keys.TAB)
   a[64].send_keys(Keys.BACKSPACE)
   a[64].send_keys(Keys.BACKSPACE)
-  a[64].send_keys("42")
+  a[64].send_keys(mixed_high)
   a[65].send_keys(Keys.TAB)
   a[66].send_keys(Keys.BACKSPACE)
   a[66].send_keys(Keys.BACKSPACE)
-  a[66].send_keys("40")
+  a[66].send_keys(mixed_threshold)
   a[67].send_keys(Keys.TAB)
 
 

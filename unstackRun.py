@@ -17,10 +17,10 @@ def unstackRun(prefix, suffix, maxMinCredit, \
                normal_floor, normal_ceiling, normal_threshold_hour, normal_threshold_minute, \
                max_floor, max_ceiling, max_threshold_hour, max_threshold_minute, \
                split_low, split_high, split_threshold, \
+               maxMixedLines, unstackLineHolders, maxPasses, pointOrDayStack, \
+               mixed_low, mixed_high, mixed_threshold, day_settings, \
                browser, testMode, verbose, runNumber):
     runName = prefix + str(runNumber) + "-" + base + "-" + seat + "-" + suffix
-
-    unstackLineHolders = 1
 
     element = WebDriverWait(browser, 60).until(
         EC.visibility_of_element_located((By.XPATH, "//*[@value='Launch Run']"))
@@ -286,161 +286,27 @@ def unstackRun(prefix, suffix, maxMinCredit, \
         #               element.get_attribute("value"))
 
         # set the max stack height for each day
-        # day 1
-        a[91].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[91].send_keys("8")
-        time.sleep(timeBetween)
-        # day 2
-        a[92].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[92].send_keys("8")
-        time.sleep(timeBetween)
-        # day 3
-        a[93].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[93].send_keys("8")
-        time.sleep(timeBetween)
-        # day 4
-        a[94].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[94].send_keys("8")
-        time.sleep(timeBetween)
-        # day 5
-        a[95].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[95].send_keys("8")
-        time.sleep(timeBetween)
-        # day 6
-        a[96].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[96].send_keys("20")
-        time.sleep(timeBetween)
-        # day 7
-        a[97].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[97].send_keys("20")
-        time.sleep(timeBetween)
-        # day 8
-        a[98].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[98].send_keys("20")
-        time.sleep(timeBetween)
-        # day 9
-        a[99].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[99].send_keys("20")
-        time.sleep(timeBetween)
-        # day 10
-        a[100].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[100].send_keys("20")
-        time.sleep(timeBetween)
-        # day 11
-        a[101].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[101].send_keys("20")
-        time.sleep(timeBetween)
-        # day 12
-        a[102].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[102].send_keys("20")
-        time.sleep(timeBetween)
-        # day 13
-        a[103].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[103].send_keys("20")
-        time.sleep(timeBetween)
-        # day 14
-        a[104].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[104].send_keys("20")
-        time.sleep(timeBetween)
-        # day 15
-        a[105].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[105].send_keys("20")
-        time.sleep(timeBetween)
-        # day 16
-        a[106].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[106].send_keys("20")
-        time.sleep(timeBetween)
-        # day 17
-        a[107].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[107].send_keys("20")
-        time.sleep(timeBetween)
-        # day 18
-        a[108].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[108].send_keys("20")
-        time.sleep(timeBetween)
-        # day 19
-        a[109].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[109].send_keys("20")
-        time.sleep(timeBetween)
-        # day 20
-        a[110].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[110].send_keys("20")
-        time.sleep(timeBetween)
-        # day 21
-        a[111].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[111].send_keys("20")
-        time.sleep(timeBetween)
-        # day 22
-        a[112].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[112].send_keys("20")
-        time.sleep(timeBetween)
-        # day 23
-        a[113].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[113].send_keys("20")
-        time.sleep(timeBetween)
-        # day 24
-        a[114].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[114].send_keys("7")
-        time.sleep(timeBetween)
-        # day 25
-        a[115].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[115].send_keys("7")
-        time.sleep(timeBetween)
-        # day 26
-        a[116].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[116].send_keys("7")
-        time.sleep(timeBetween)
-        # day 27
-        a[117].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[117].send_keys("7")
-        time.sleep(timeBetween)
-        # day 28
-        a[118].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[118].send_keys("20")
-        time.sleep(timeBetween)
-        # day 29
-        a[119].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[119].send_keys("20")
-        time.sleep(timeBetween)
-        # day 30
-        a[120].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[120].send_keys("20")
-        time.sleep(timeBetween)
-        # day 31
-        a[121].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
-        time.sleep(timeBetween)
-        a[121].send_keys("5")
-        time.sleep(timeBetween)
+        # Day 1 starts at index 91
+        start_index = 91
+        for day in range(1, 32):
+            index = start_index + (day - 1)
+            
+            # Check if the index is valid for the current page
+            if index >= len(a):
+                if verbose:
+                    print(f"Stopping day loop at day {day} (index {index}) - element not found.")
+                break
+                
+            value = day_settings.get(day, 0) # Default to 0 if not provided
+            
+            try:
+                a[index].send_keys(Keys.BACKSPACE + Keys.BACKSPACE)
+                time.sleep(timeBetween)
+                a[index].send_keys(str(value))
+                time.sleep(timeBetween)
+            except Exception as e:
+                if verbose:
+                    print(f"Could not set value for day {day}: {e}")
 
 
     ####################################

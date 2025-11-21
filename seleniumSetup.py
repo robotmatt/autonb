@@ -1,19 +1,14 @@
-import os
-
 from selenium import webdriver
 
-if os.name == 'nt': # check if on windows 'nt'
-    def seleniumSetup():
-        service = webdriver.ChromeService()
-        browser = webdriver.Chrome(service=service)
-        return browser
-
-if os.name == 'posix': # check if on mac 'postix'
-    def seleniumSetup():
-        #might have to point to a different location depending on where your chromedriver is installed
-        service = webdriver.ChromeService(executable_path= '/opt/homebrew/bin/chromedriver')
-        browser = webdriver.Chrome(service=service)
-        return browser
+def seleniumSetup():
+    from selenium.webdriver.chrome.service import Service as ChromeService
+    from webdriver_manager.chrome import ChromeDriverManager
+    
+    # webdriver_manager automatically downloads and installs the correct chromedriver
+    # for the current version of Chrome.
+    service = ChromeService(ChromeDriverManager().install())
+    browser = webdriver.Chrome(service=service)
+    return browser
 
 # the following two lines are used for Safari
 #    browser = webdriver.Safari()
