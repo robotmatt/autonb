@@ -3,6 +3,11 @@ AutoNB is a Python-based automation tool designed to simplify and streamline the
 
 ## 🖥️ Installation & Setup
 
+### Prerequisites
+**Google Chrome** must be installed on your system. Download from [google.com/chrome](https://www.google.com/chrome/)
+- The app uses Selenium to automate Chrome
+- ChromeDriver is automatically managed, but Chrome itself must be installed manually
+
 ### 1. Install Python
 **MacOS**
 - **Option A (Recommended):** Install via Homebrew: `brew install python`
