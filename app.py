@@ -127,6 +127,30 @@ with st.expander("Configuration", expanded=True):
         st.markdown("**Limits**")
         maxMinCredit = st.number_input("Max Min Credit (0 for no restriction)", value=config.maxMinCredit)
 
+    # Advanced Configuration
+    with st.expander("⚙️ Advanced Configuration", expanded=False):
+        st.markdown("**Server URLs**")
+        url_col1, url_col2 = st.columns(2)
+        with url_col1:
+            production_url = st.text_input(
+                "Production Server URL",
+                value="https://uca.pbs.vmc.navblue.cloud/cgi-bin-xml/class/main.cgi",
+                help="URL for the production PBS server"
+            )
+        with url_col2:
+            uat_url = st.text_input(
+                "UAT Server URL",
+                value="https://uca-uat.pbs.vmc.navblue.cloud/cgi-bin-xml/class/login.cgi",
+                help="URL for the UAT/testing PBS server"
+            )
+
+# Help Section (Sidebar)
+with st.sidebar:
+    st.markdown("## ℹ️ Help & Documentation")
+    st.markdown("### Coming Soon")
+    st.info("Detailed documentation and help content will be added here.")
+    # TODO: Add comprehensive help documentation
+
 
 # Main Execution Area
 st.header("Execution")
@@ -143,7 +167,7 @@ with tab_basic:
         # Setup Browser
         try:
             browser = seleniumSetup()
-            browserSetup(browser, productionServer, input_username, input_password)
+            browserSetup(browser, productionServer, input_username, input_password, production_url, uat_url)
             time.sleep(5)  # wait for javascript
 
             now = datetime.now()
@@ -205,7 +229,7 @@ with tab_unstack:
         # Setup Browser
         try:
             browser = seleniumSetup()
-            browserSetup(browser, productionServer, input_username, input_password)
+            browserSetup(browser, productionServer, input_username, input_password, production_url, uat_url)
             time.sleep(5)  # wait for javascript
 
             now = datetime.now()
