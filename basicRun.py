@@ -16,23 +16,28 @@ def basicRun(prefix, suffix, maxMinCredit,\
              normal_floor, normal_ceiling, normal_threshold_hour, normal_threshold_minute,\
              max_floor, max_ceiling, max_threshold_hour, max_threshold_minute,\
              split_low, split_high, split_threshold,\
-             browser, testMode, verbose, runNumber):
+             maxMixedLines, mixed_low, mixed_high, mixed_threshold,\
+             browser, testMode, verbose, runNumber, log_callback=None):
+
+  def log(msg):
+      if verbose:
+          print(msg)
+      if log_callback:
+          log_callback(msg)
 
   runName = prefix + str(runNumber) + "-" + base + "-" + seat + "-" + suffix
 
   element = WebDriverWait(browser, 60).until(
     EC.visibility_of_element_located((By.XPATH, "//*[@value='Launch Run']"))
   )
-  if verbose:
-    print("Launch page is ready")
+  log("Launch page is ready")
   launchButton = browser.find_element("xpath", "//*[@value='Launch Run']")
   launchButton.click()
 
   groupDropdown = Select(browser.find_element("xpath",
     "//*[contains(@id,'add_run_to_queue_rungroups')]"))
   group = base + "-XMJ-" + seat
-  if verbose:
-    print("selecting " + group)
+  log("selecting " + group)
   groupDropdown.select_by_visible_text(group)
 
   # set the run name
@@ -57,8 +62,7 @@ def basicRun(prefix, suffix, maxMinCredit,\
   #####################################
   ## Max Iterations
   #####################################
-  if verbose:
-    print("max iterations: " + str(maxIterations))
+  log("max iterations: " + str(maxIterations))
   time.sleep(timeBetween)
   a[0].send_keys(Keys.BACKSPACE)
   a[0].send_keys(Keys.BACKSPACE)
@@ -80,11 +84,10 @@ def basicRun(prefix, suffix, maxMinCredit,\
 
   a[5].send_keys(Keys.TAB) #basically go to the minute portion of the min open credit field (the hour portion is a[3] and the minute portion is a[4]). Then tab to highlight what ends up being a[5}.
 
-  if verbose:
-    print("normal credit window: " + "floor-" + str(normal_floor) + ", ceiling-" + str(normal_ceiling) + ", threshold-" + str(normal_threshold_hour) + ":" + str(normal_threshold_minute))
-    print("min credit window: " + "floor-" + str(min_floor) + ", ceiling-" + str(min_ceiling) + ", threshold-" + str(min_threshold_hour) + ":" + str(min_threshold_minute))
-    print("max credit window: " + "floor-" + str(max_floor) + ", ceiling-" + str(max_ceiling) + ", threshold-" + str(max_threshold_hour) + ":" + str(max_threshold_minute))
-    print("split credit window: " + "floor-" + str(split_low) + ", ceiling-" + str(split_high) + ", threshold-" + str(split_threshold))
+  log("normal credit window: " + "floor-" + str(normal_floor) + ", ceiling-" + str(normal_ceiling) + ", threshold-" + str(normal_threshold_hour) + ":" + str(normal_threshold_minute))
+  log("min credit window: " + "floor-" + str(min_floor) + ", ceiling-" + str(min_ceiling) + ", threshold-" + str(min_threshold_hour) + ":" + str(min_threshold_minute))
+  log("max credit window: " + "floor-" + str(max_floor) + ", ceiling-" + str(max_ceiling) + ", threshold-" + str(max_threshold_hour) + ":" + str(max_threshold_minute))
+  log("split credit window: " + "floor-" + str(split_low) + ", ceiling-" + str(split_high) + ", threshold-" + str(split_threshold))
 
   #####################################
   ## Normal credit window
@@ -168,45 +171,45 @@ def basicRun(prefix, suffix, maxMinCredit,\
       a[31].send_keys(Keys.TAB)
 
   ####################################
-  ## Mixed Lines (hardcoded right now)
+  ## Mixed Lines
   #####################################
   a[50].send_keys(Keys.BACKSPACE)
   a[50].send_keys(Keys.BACKSPACE)
-  a[50].send_keys("38")
+  a[50].send_keys(mixed_low)
   a[51].send_keys(Keys.TAB)
   a[52].send_keys(Keys.BACKSPACE)
   a[52].send_keys(Keys.BACKSPACE)
-  a[52].send_keys("42")
+  a[52].send_keys(mixed_high)
   a[53].send_keys(Keys.TAB)
   a[54].send_keys(Keys.BACKSPACE)
   a[54].send_keys(Keys.BACKSPACE)
-  a[54].send_keys("40")
+  a[54].send_keys(mixed_threshold)
   a[55].send_keys(Keys.TAB)
 
   a[56].send_keys(Keys.BACKSPACE)
   a[56].send_keys(Keys.BACKSPACE)
-  a[56].send_keys("38")
+  a[56].send_keys(mixed_low)
   a[57].send_keys(Keys.TAB)
   a[58].send_keys(Keys.BACKSPACE)
   a[58].send_keys(Keys.BACKSPACE)
-  a[58].send_keys("42")
+  a[58].send_keys(mixed_high)
   a[59].send_keys(Keys.TAB)
   a[60].send_keys(Keys.BACKSPACE)
   a[60].send_keys(Keys.BACKSPACE)
-  a[60].send_keys("40")
+  a[60].send_keys(mixed_threshold)
   a[61].send_keys(Keys.TAB)
 
   a[62].send_keys(Keys.BACKSPACE)
   a[62].send_keys(Keys.BACKSPACE)
-  a[62].send_keys("38")
+  a[62].send_keys(mixed_low)
   a[63].send_keys(Keys.TAB)
   a[64].send_keys(Keys.BACKSPACE)
   a[64].send_keys(Keys.BACKSPACE)
-  a[64].send_keys("42")
+  a[64].send_keys(mixed_high)
   a[65].send_keys(Keys.TAB)
   a[66].send_keys(Keys.BACKSPACE)
   a[66].send_keys(Keys.BACKSPACE)
-  a[66].send_keys("40")
+  a[66].send_keys(mixed_threshold)
   a[67].send_keys(Keys.TAB)
 
 
@@ -218,13 +221,11 @@ def basicRun(prefix, suffix, maxMinCredit,\
   if testMode:
     cancelButton = browser.find_element("xpath", "//*[@value='Cancel']")
     cancelButton.click()
-    if verbose:
-      print('Canceled ' + runName)
+    log('Canceled ' + runName)
     time.sleep(timeBetween)
   else:
-    if verbose:
-      print('Submitting ' + runName)
-      print()
+    log('Submitting ' + runName)
+    log('')
     saveButton = browser.find_element("xpath", "//*[@value='Save']")
     saveButton.click()
     time.sleep(timeBetween)
