@@ -164,6 +164,16 @@ with tab_basic:
     if st.button("Start Basic Run", type="primary"):
         st.write("Starting Basic Run...")
         
+        # UI Logger setup
+        log_expander = st.expander("Execution Log", expanded=True)
+        log_placeholder = log_expander.empty()
+        log_messages = []
+
+        def ui_logger(msg):
+            log_messages.append(msg)
+            # Create a code block with all messages joined by newlines
+            log_placeholder.code("\n".join(log_messages))
+        
         # Setup Browser
         try:
             browser = seleniumSetup()
@@ -193,7 +203,7 @@ with tab_basic:
                              run_data["maxThresholdHour"], run_data["maxThresholdMinute"], split_low,
                              split_high, split_threshold, maxMixedLines, mixed_low, mixed_high, mixed_threshold,
                              browser, testMode, verbose,
-                             current_runcount)
+                             current_runcount, log_callback=ui_logger)
                     current_runcount += 1
                 else:
                     if verbose: st.text(f"Skipping run {current_runcount}: {run_data['reason']}")
@@ -226,6 +236,15 @@ with tab_unstack:
     if st.button("Start Unstack Run", type="primary"):
         st.write("Starting Unstack Run...")
         
+        # UI Logger setup
+        log_expander = st.expander("Execution Log", expanded=True)
+        log_placeholder = log_expander.empty()
+        log_messages = []
+
+        def ui_logger(msg):
+            log_messages.append(msg)
+            log_placeholder.code("\n".join(log_messages))
+        
         # Setup Browser
         try:
             browser = seleniumSetup()
@@ -254,7 +273,7 @@ with tab_unstack:
                                run_data["maxThresholdHour"], run_data["maxThresholdMinute"], split_low,
                                split_high, split_threshold, maxMixedLines, unstackLineHolders, maxPasses,
                                pointOrDayStack, mixed_low, mixed_high, mixed_threshold, day_settings,
-                               browser, testMode, verbose, current_runcount)
+                               browser, testMode, verbose, current_runcount, log_callback=ui_logger)
                                    
                     current_runcount += 1
                 else:

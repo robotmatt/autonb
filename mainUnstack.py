@@ -42,8 +42,10 @@ else:
                                                              normalFloor, normalCeiling, normalThresholdHour,
                                                              normalThresholdMinute, maxFloor, maxCeiling,
                                                              maxThresholdHour, maxThresholdMinute, split_low,
-                                                             split_high, split_threshold, browser, testMode, verbose,
-                                                             runcount)
+                                                             split_high, split_threshold, maxMixedLines,
+                                                             unstackLineHolders, maxPasses, pointOrDayStack, mixed_low,
+                                                             mixed_high, mixed_threshold, {}, browser, testMode,
+                                                             verbose, runcount)
                                                     runcount = runcount + 1
                                                 else:
                                                     print("skipping run " + str(

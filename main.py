@@ -41,7 +41,8 @@ else:
                                                              normalFloor, normalCeiling, normalThresholdHour,
                                                              normalThresholdMinute, maxFloor, maxCeiling,
                                                              maxThresholdHour, maxThresholdMinute, split_low,
-                                                             split_high, split_threshold, browser, testMode, verbose,
+                                                             split_high, split_threshold, maxMixedLines, mixed_low,
+                                                             mixed_high, mixed_threshold, browser, testMode, verbose,
                                                              runcount)
                                                     runcount = runcount + 1
                                                 else:

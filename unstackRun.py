@@ -19,22 +19,27 @@ def unstackRun(prefix, suffix, maxMinCredit, \
                split_low, split_high, split_threshold, \
                maxMixedLines, unstackLineHolders, maxPasses, pointOrDayStack, \
                mixed_low, mixed_high, mixed_threshold, day_settings, \
-               browser, testMode, verbose, runNumber):
+               browser, testMode, verbose, runNumber, log_callback=None):
+
+    def log(msg):
+        if verbose:
+            print(msg)
+        if log_callback:
+            log_callback(msg)
+
     runName = prefix + str(runNumber) + "-" + base + "-" + seat + "-" + suffix
 
     element = WebDriverWait(browser, 60).until(
         EC.visibility_of_element_located((By.XPATH, "//*[@value='Launch Run']"))
     )
-    if verbose:
-        print("Launch page is ready")
+    log("Launch page is ready")
     launchButton = browser.find_element("xpath", "//*[@value='Launch Run']")
     launchButton.click()
 
     groupDropdown = Select(browser.find_element("xpath",
                                                 "//*[contains(@id,'add_run_to_queue_rungroups')]"))
     group = base + "-XMJ-" + seat
-    if verbose:
-        print("selecting " + group)
+    log("selecting " + group)
     groupDropdown.select_by_visible_text(group)
 
     # set the run name
@@ -59,8 +64,7 @@ def unstackRun(prefix, suffix, maxMinCredit, \
     #####################################
     ## Max Iterations
     #####################################
-    if verbose:
-        print("max iterations: " + str(maxIterations))
+    log("max iterations: " + str(maxIterations))
     time.sleep(timeBetween)
     a[0].send_keys(Keys.BACKSPACE)
     a[0].send_keys(Keys.BACKSPACE)
@@ -83,18 +87,17 @@ def unstackRun(prefix, suffix, maxMinCredit, \
     a[5].send_keys(
         Keys.TAB)  # basically go to the minute portion of the min open credit field (the hour portion is a[3] and the minute portion is a[4]). Then tab to highlight what ends up being a[5}.
 
-    if verbose:
-        print("normal credit window: " + "floor-" + str(normal_floor) + ", ceiling-" + str(
-            normal_ceiling) + ", threshold-" + str(normal_threshold_hour) + ":" + str(normal_threshold_minute))
-        print(
-            "min credit window: " + "floor-" + str(min_floor) + ", ceiling-" + str(min_ceiling) + ", threshold-" + str(
-                min_threshold_hour) + ":" + str(min_threshold_minute))
-        print(
-            "max credit window: " + "floor-" + str(max_floor) + ", ceiling-" + str(max_ceiling) + ", threshold-" + str(
-                max_threshold_hour) + ":" + str(max_threshold_minute))
-        print(
-            "split credit window: " + "floor-" + str(split_low) + ", ceiling-" + str(split_high) + ", threshold-" + str(
-                split_threshold))
+    log("normal credit window: " + "floor-" + str(normal_floor) + ", ceiling-" + str(
+        normal_ceiling) + ", threshold-" + str(normal_threshold_hour) + ":" + str(normal_threshold_minute))
+    log(
+        "min credit window: " + "floor-" + str(min_floor) + ", ceiling-" + str(min_ceiling) + ", threshold-" + str(
+            min_threshold_hour) + ":" + str(min_threshold_minute))
+    log(
+        "max credit window: " + "floor-" + str(max_floor) + ", ceiling-" + str(max_ceiling) + ", threshold-" + str(
+            max_threshold_hour) + ":" + str(max_threshold_minute))
+    log(
+        "split credit window: " + "floor-" + str(split_low) + ", ceiling-" + str(split_high) + ", threshold-" + str(
+            split_threshold))
 
     #####################################
     ## Normal credit window
@@ -293,8 +296,7 @@ def unstackRun(prefix, suffix, maxMinCredit, \
             
             # Check if the index is valid for the current page
             if index >= len(a):
-                if verbose:
-                    print(f"Stopping day loop at day {day} (index {index}) - element not found.")
+                log(f"Stopping day loop at day {day} (index {index}) - element not found.")
                 break
                 
             value = day_settings.get(day, 0) # Default to 0 if not provided
@@ -305,8 +307,7 @@ def unstackRun(prefix, suffix, maxMinCredit, \
                 a[index].send_keys(str(value))
                 time.sleep(timeBetween)
             except Exception as e:
-                if verbose:
-                    print(f"Could not set value for day {day}: {e}")
+                log(f"Could not set value for day {day}: {e}")
 
 
     ####################################
@@ -315,13 +316,11 @@ def unstackRun(prefix, suffix, maxMinCredit, \
     if testMode:
         cancelButton = browser.find_element("xpath", "//*[@value='Cancel']")
         cancelButton.click()
-        if verbose:
-            print('Canceled ' + runName)
+        log('Canceled ' + runName)
         time.sleep(timeBetween)
     else:
-        if verbose:
-            print('Submitting ' + runName)
-            print()
+        log('Submitting ' + runName)
+        log('')
         saveButton = browser.find_element("xpath", "//*[@value='Save']")
         saveButton.click()
         time.sleep(timeBetween)

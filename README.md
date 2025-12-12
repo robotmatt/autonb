@@ -19,7 +19,21 @@ AutoNB is a Python-based automation tool designed to simplify and streamline the
 - **Option B:** Download the installer from [python.org](https://www.python.org/downloads/windows/)
   - **IMPORTANT:** Check the box **"Add Python to PATH"** during installation.
 
-### 2. Setup & Run
+### 2. Credentials Setup (Required)
+Create a file named `userInfo.py` in the project root directory. This file should contain your NavBlue credentials:
+
+```python
+username = 'YourUsername'
+password = 'YourPassword'
+```
+
+**Note:** If you leave `userInfo.py` empty or don't create it, the Streamlit UI will prompt you for credentials. However, **CLI mode requires this file to be present and populated.**
+
+## 🚀 Running the Application
+
+### Option 1: Streamlit UI (Recommended)
+The easiest way to use AutoNB is via the web interface.
+
 **MacOS / Linux**
 1. Open Terminal.
 2. Navigate to the project folder.
@@ -29,19 +43,19 @@ AutoNB is a Python-based automation tool designed to simplify and streamline the
 1. Open the project folder.
 2. Double-click `run_app.bat`.
 
-This will automatically install all dependencies (including Selenium and the correct ChromeDriver) and launch the AutoNB interface.
+This will automatically install dependencies and launch the browser-based UI where you can configure and run your automation.
 
-## Usage
-### Credentials
-Enter your NavBlue Username and Password into the `userInfo.py` file (renamed from secrets.py). If it doesn't exist just create a `userInfo.py` that looks like this:
+### Option 2: Manual CLI Mode
+For advanced users who prefer the command line or want to run headless scripts.
 
-`username = 'Username'`<br /> 
-`password = 'Password'`<br />
-
-**Note:** If you leave `userInfo.py` empty or don't create it, the app will automatically prompt you for credentials in the UI.
+1. Edit `config.py` to set your desired run parameters (Base, Seat, Thresholds, etc.).
+2. Ensure `userInfo.py` is set up with your credentials.
+3. Run the script:
+   - For **Basic Runs**: `python3 main.py`
+   - For **Unstack Runs**: `python3 mainUnstack.py`
 
 ### config.py
-Most of the settings you need are contained in config.py. See the inline documentation for usage of all the variables. You can now also configure these directly in the UI!
+Most of the settings for CLI mode are contained in `config.py`. See the inline documentation in that file for usage of all variables. Note that the UI overrides these settings when running in Streamlit mode.
 
 ## 📁 Project Structure
 | File      | Purpose                                                                                                 |
