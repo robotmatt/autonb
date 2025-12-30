@@ -181,7 +181,7 @@ def unstackRun(prefix, suffix, maxMinCredit, \
         a[31].send_keys(Keys.TAB)
 
     ####################################
-    ## Mixed Lines (hardcoded right now)
+    ## Mixed Lines 
     #####################################
     a[50].send_keys(Keys.BACKSPACE)
     a[50].send_keys(Keys.BACKSPACE)
@@ -265,29 +265,6 @@ def unstackRun(prefix, suffix, maxMinCredit, \
                 print("radiobutton = ", element.get_attribute("id"), " with value ",
                       element.get_attribute("value"))
 
-        # # check the priority stack date box which is the fifth checkbox in the array
-        # listOfCheckBoxes[4].click()
-        # time.sleep(timeBetween)
-        #
-        # listOfDropdowns = []
-        # listOfDropdowns = browser.find_elements_by_class_name("DropDownList")
-        #
-        # # select the month for the priority stack date. This is the fifth dropdown in the array
-        # monthDropdown = Select(listOfDropdowns[4])
-        # monthDropdown.select_by_visible_text("December")
-        # time.sleep(timeBetween)
-        # # select the day for the priority stack date. This is the sixth dropdown in the array
-        # dayDropdown = Select(listOfDropdowns[5])
-        # dayDropdown.select_by_visible_text("25")
-        # time.sleep(timeBetween)
-        #
-        # if verbose:
-        #     # prints a log of all the dropdown lists
-        #     print(len(listOfDropdowns))
-        #     for element in listOfDropdowns:
-        #         print("dropdown = ", element.get_attribute("id"), " with value ",
-        #               element.get_attribute("value"))
-
         # set the max stack height for each day
         # Day 1 starts at index 91
         start_index = 91
@@ -307,7 +284,7 @@ def unstackRun(prefix, suffix, maxMinCredit, \
                 a[index].send_keys(str(value))
                 time.sleep(timeBetween)
             except Exception as e:
-                log(f"Could not set value for day {day}: {e}")
+                log(f"Could not set value for day {day}: Not in this month")
 
 
     ####################################

@@ -1,12 +1,22 @@
+import os
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 
 def seleniumSetup():
-    from selenium.webdriver.chrome.service import Service as ChromeService
-    from webdriver_manager.chrome import ChromeDriverManager
-    
     # webdriver_manager automatically downloads and installs the correct chromedriver
     # for the current version of Chrome.
-    service = ChromeService(ChromeDriverManager().install())
+    driver_path = ChromeDriverManager().install()
+    
+    # Fix for bug where webdriver-manager returns the license file instead of the binary
+    if "THIRD_PARTY_NOTICES" in driver_path:
+        directory = os.path.dirname(driver_path)
+        binary_name = "chromedriver.exe" if os.name == 'nt' else "chromedriver"
+        binary_path = os.path.join(directory, binary_name)
+        if os.path.exists(binary_path):
+            driver_path = binary_path
+    
+    service = ChromeService(driver_path)
     browser = webdriver.Chrome(service=service)
     return browser
 
