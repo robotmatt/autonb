@@ -15,6 +15,12 @@ def seleniumSetup():
         binary_path = os.path.join(directory, binary_name)
         if os.path.exists(binary_path):
             driver_path = binary_path
+            
+    # Ensure binary is executable on Unix-like systems
+    if os.name != 'nt' and os.path.exists(driver_path):
+        current_mode = os.stat(driver_path).st_mode
+        if not (current_mode & 0o111):  # Check if any execute bit is set
+            os.chmod(driver_path, current_mode | 0o111)
     
     service = ChromeService(driver_path)
     browser = webdriver.Chrome(service=service)
