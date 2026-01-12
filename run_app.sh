@@ -1,9 +1,21 @@
 #!/bin/bash
 
+# Define venv directory
+VENV_DIR="venv"
+
+# Create virtual environment if it doesn't exist
+if [ ! -d "$VENV_DIR" ]; then
+    echo "Creating virtual environment..."
+    python3 -m venv "$VENV_DIR"
+fi
+
+# Activate virtual environment
+source "$VENV_DIR/bin/activate"
+
 # Install requirements
 echo "Installing dependencies..."
-python3 -m pip install -r requirements.txt
+pip install -r requirements.txt
 
 # Run the app
 echo "Starting AutoNB..."
-python3 -m streamlit run app.py
+streamlit run app.py
