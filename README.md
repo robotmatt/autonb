@@ -27,7 +27,7 @@ username = 'YourUsername'
 password = 'YourPassword'
 ```
 
-**Note:** If you leave `userInfo.py` empty or don't create it, the Streamlit UI will prompt you for credentials. However, **CLI mode requires this file to be present and populated.**
+**Note:** `userInfo.py` is included in `.gitignore` and will never be tracked by Git to keep your credentials secure. If you leave `userInfo.py` empty or don't create it, the Streamlit UI will prompt you for credentials. However, **CLI mode requires this file to be present and populated.**
 
 ## 🚀 Running the Application
 
@@ -44,6 +44,12 @@ The easiest way to use AutoNB is via the web interface.
 2. Double-click `run_app.bat`.
 
 This will automatically install dependencies and launch the browser-based UI where you can configure and run your automation.
+
+**Troubleshooting (Windows)**
+If you see an error like `'python' or 'pip' is not recognized`:
+- Ensure Python is installed.
+- Re-run the Python installer and select **"Modify"**, then ensure **"Add Python to environment variables"** is checked.
+- Or, manually add the Python installation path to your system's PATH.
 
 ### Option 2: Manual CLI Mode
 For advanced users who prefer the command line or want to run headless scripts.

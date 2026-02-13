@@ -1,9 +1,9 @@
 @echo off
 echo Upgrading pip...
-pip install --upgrade pip
+python -m pip install --upgrade pip
 
 echo Installing dependencies...
-pip install streamlit selenium webdriver-manager
+python -m pip install --upgrade -r requirements.txt
 
 echo Starting AutoNB...
 python -m streamlit run app.py
