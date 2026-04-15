@@ -27,7 +27,12 @@ def unstackRun(prefix, suffix, maxMinCredit, \
         if log_callback:
             log_callback(msg)
 
-    runName = prefix + str(runNumber) + "-" + base + "-" + seat + "-" + suffix
+    if seat == "FA":
+        runName = base + "-ALL-FA"
+        group = base + "-ALL-FA"
+    else:
+        runName = prefix + str(runNumber) + "-" + base + "-" + seat + "-" + suffix
+        group = base + "-XMJ-" + seat
 
     element = WebDriverWait(browser, 60).until(
         EC.visibility_of_element_located((By.XPATH, "//*[@value='Launch Run']"))
@@ -38,7 +43,6 @@ def unstackRun(prefix, suffix, maxMinCredit, \
 
     groupDropdown = Select(browser.find_element("xpath",
                                                 "//*[contains(@id,'add_run_to_queue_rungroups')]"))
-    group = base + "-XMJ-" + seat
     log("selecting " + group)
     groupDropdown.select_by_visible_text(group)
 

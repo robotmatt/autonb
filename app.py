@@ -31,7 +31,12 @@ with config_placeholder.container():
             selected_base = st.selectbox("Base", ["IAH", "IAD"], index=0 if "IAH" in config.baseList else 1)
             baseList = [selected_base]
         with c3:
-            seat = st.selectbox("Seat", ["CA", "FO"], index=0 if config.seat == "CA" else 1)
+            seat_options = ["CA", "FO", "FA"]
+            try:
+                default_seat_index = seat_options.index(config.seat)
+            except ValueError:
+                default_seat_index = 0
+            seat = st.selectbox("Seat", seat_options, index=default_seat_index)
         with c4:
             prefix = st.text_input("Prefix", value=config.prefix)
         with c5:
