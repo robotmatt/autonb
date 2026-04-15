@@ -26,7 +26,7 @@ def basicRun(prefix, suffix, maxMinCredit,\
           log_callback(msg)
 
   if seat == "FA":
-      runName = base + "-ALL-FA"
+      runName = prefix + str(runNumber) + "-" + base + "-ALL-FA-" + suffix
       group = base + "-ALL-FA"
   else:
       runName = prefix + str(runNumber) + "-" + base + "-" + seat + "-" + suffix
