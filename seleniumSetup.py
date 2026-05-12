@@ -8,35 +8,24 @@ def seleniumSetup():
     # for the current version of Chrome.
     driver_path = ChromeDriverManager().install()
     
-    # Debug print to help identify path issues
-    print(f"Using ChromeDriver from: {driver_path}")
+    # Fix for bug where webdriver-manager returns the license file instead of the binary
+    if "THIRD_PARTY_NOTICES" in driver_path:
+        directory = os.path.dirname(driver_path)
+        binary_name = "chromedriver.exe" if os.name == 'nt' else "chromedriver"
+        binary_path = os.path.join(directory, binary_name)
+        if os.path.exists(binary_path):
+            driver_path = binary_path
+            
+    # Ensure binary is executable on Unix-like systems
+    if os.name != 'nt' and os.path.exists(driver_path):
+        current_mode = os.stat(driver_path).st_mode
+        if not (current_mode & 0o111):  # Check if any execute bit is set
+            os.chmod(driver_path, current_mode | 0o111)
     
-    # Fix for bug where webdriver-manager might return a path containing LICENSE or THIRD_PARTY_NOTICES
-    # or just the directory.
-    if not (driver_path.endswith(".exe") and os.path.isfile(driver_path)):
-        # If it's a directory or a file that isn't the exe, search for the exe inside the same folder
-        parent_dir = driver_path if os.path.isdir(driver_path) else os.path.dirname(driver_path)
-        
-        # Search for chromedriver.exe in the directory
-        for root, dirs, files in os.walk(parent_dir):
-            if "chromedriver.exe" in files:
-                driver_path = os.path.join(root, "chromedriver.exe")
-                break
-    
-    print(f"Final ChromeDriver path: {driver_path}")
-    
-    options = webdriver.ChromeOptions()
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    
-    # Force use of the specific driver path we just found/downloaded
     service = ChromeService(driver_path)
-    browser = webdriver.Chrome(service=service, options=options)
+    browser = webdriver.Chrome(service=service)
     return browser
 
 # the following two lines are used for Safari
 #    browser = webdriver.Safari()
 #    browser.maximize_window()
-
-
-

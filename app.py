@@ -169,6 +169,7 @@ with tab_basic:
     # Basic run doesn't have many specific settings exposed yet that aren't global
     
     if st.button("Start Basic Run", type="primary"):
+        config_placeholder.empty()
         st.write("Starting Basic Run...")
         
         # UI Logger setup
