@@ -1,10 +1,13 @@
 import streamlit as st
 import time
-from datetime import datetime
+import os
+from datetime import datetime, date
+from dateutil.relativedelta import relativedelta
 from seleniumSetup import seleniumSetup
 from browserSetup import browserSetup
 from basicRun import basicRun
 from unstackRun import unstackRun
+from analysisRun import run_analysis
 import config
 from run_logic import generate_run_params
 
@@ -162,7 +165,7 @@ with st.sidebar:
 # Main Execution Area
 st.header("Execution")
 
-tab_basic, tab_unstack = st.tabs(["Basic Run", "Unstack Run"])
+tab_basic, tab_unstack, tab_analysis = st.tabs(["Basic Run", "Unstack Run", "Analysis"])
 
 with tab_basic:
     st.subheader("Basic Run Configuration")
@@ -290,6 +293,104 @@ with tab_unstack:
                     if verbose: st.text(f"Skipping run {current_runcount}: {run_data['reason']}")
             
             st.success("Unstack Runs Complete!")
-                
+
         except Exception as e:
             st.error(f"An error occurred: {e}")
+
+with tab_analysis:
+    st.subheader("Analysis: Pull PBS Run Reports")
+    st.markdown(
+        "Navigate to the **Completed Runs** tab in the PBS Run Manager, select a "
+        "signature, and download the **Combined Report**, **Dynamic Stats**, and "
+        "**Schedule PDF** for every run."
+    )
+
+    # --- Month selector (default = current month) ---
+    _now = datetime.now()
+    _month_options = [
+        (_now - relativedelta(months=i)).strftime("%B %Y")
+        for i in range(-1, 12)
+    ]
+    ana_col1, ana_col2 = st.columns(2)
+    with ana_col1:
+        ana_month = st.selectbox(
+            "Month",
+            _month_options,
+            index=0,
+            key="ana_month",
+            help="Month shown in the PBS Run Manager dropdown"
+        )
+    with ana_col2:
+        default_output = os.path.join(os.path.dirname(os.path.abspath(__file__)), "analysis_output")
+        ana_output_dir = st.text_input(
+            "Output Folder",
+            value=default_output,
+            key="ana_output",
+            help="Root folder where downloaded reports will be saved"
+        )
+
+    # --- Signature filter ---
+    ana_sig_filter = st.text_input(
+        "Signature Filter (leave blank for all)",
+        value="",
+        key="ana_sig_filter",
+        help="Case-insensitive substring match against signature names, e.g. 'IAD-XMJ-CA'"
+    )
+
+    # --- Run scope ---
+    ana_scope = st.radio(
+        "Run Scope",
+        ["All runs for signature(s)", "Single run by index"],
+        index=0,
+        key="ana_scope",
+        horizontal=True
+    )
+    ana_single_index = 1
+    if ana_scope == "Single run by index":
+        ana_single_index = st.number_input(
+            "Run index (1 = first run in the list)",
+            min_value=1,
+            value=1,
+            step=1,
+            key="ana_run_idx"
+        )
+
+    # --- Start button ---
+    if st.button("Start Analysis", type="primary", key="ana_start"):
+        config_placeholder.empty()
+
+        log_expander = st.expander("Analysis Log", expanded=True)
+        with log_expander:
+            log_container = st.container(height=400)
+            log_placeholder = log_container.empty()
+        log_messages = []
+
+        def ana_logger(msg):
+            log_messages.append(msg)
+            log_placeholder.code("\n".join(log_messages))
+
+        scope_key = "all" if ana_scope == "All runs for signature(s)" else "single"
+
+        try:
+            browser = seleniumSetup(download_dir=ana_output_dir)
+            browserSetup(browser, productionServer, input_username, input_password,
+                         production_url, uat_url)
+            time.sleep(5)  # wait for JS / login redirect
+
+            run_analysis(
+                browser=browser,
+                month_str=ana_month,
+                sig_filter=ana_sig_filter,
+                run_scope=scope_key,
+                single_run_index=int(ana_single_index),
+                output_dir=ana_output_dir,
+                log_callback=ana_logger,
+            )
+
+            st.success("Analysis complete! Check the output folder for results.")
+            st.info(f"📁 {os.path.abspath(ana_output_dir)}")
+
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
+            import traceback
+            ana_logger(traceback.format_exc())
