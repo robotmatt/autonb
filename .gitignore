@@ -220,3 +220,4 @@ http-client.private.env.json
 
 # AutoNB
 userInfo.py
+analysis_output/
