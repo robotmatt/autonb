@@ -610,3 +610,7 @@ def run_analysis(browser, month_str, sig_filter, run_scope, single_run_index,
                 log(f"    ⚠ Error in Schedule PDF: {e}")
 
     log("\n✅ Analysis complete.")
+    try:
+        browser.quit()
+    except:
+        pass
